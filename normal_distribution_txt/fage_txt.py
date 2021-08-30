@@ -5,7 +5,10 @@ import xlrd
 
 # import time
 
-URL = "common_network_slave_data_callback():"
+URL = "common_network_slave_data_callback():" #需要计算的关键字
+FILE = "3.txt" #分析的文件
+YNAME = "权重"
+XNAME = "时间（us）"
 
 def get_txt_value(filename):  # j代表列0是第一列,j,filename 为文件名
     
@@ -54,9 +57,9 @@ class higram:
 
         plt.plot(bins, y, 'r--', linestyle='-')  # 概率分布图"_"代表实线,"r--"代表红色
 
-        plt.xlabel("区间")  # 显示纵轴标签
+        plt.xlabel(XNAME)  # 显示纵轴标签
 
-        plt.ylabel("fageniub_v")  # 显示图标题
+        plt.ylabel(YNAME)  # 显示图标题
 
         plt.title(self.dimension + "_正态分布图")
         plt.subplots_adjust(left=0.10)  # 把画的图从左边0.10(整个为1)处开始, 要不把y轴的label显示不出来
@@ -66,23 +69,19 @@ class higram:
 
 if __name__ == "__main__":
     # s=time.time()
-    data = get_txt_value("3.txt")[0]  # 数据
+    data = get_txt_value(FILE)[0]  # 数据
 
-    mu = get_txt_value("3.txt")[1]  # 均值
-    sigma = get_txt_value("3.txt")[2]  # 标准差
+    mu = get_txt_value(FILE)[1]  # 均值
+    sigma = get_txt_value(FILE)[2]  # 标准差
     print(data)
     print(mu)
     print(sigma)
-    Dimension = "网络传输时间"
-    
-    # e=time.time()
-    # t=e-s
-    # print(t)
+    Dimension = "网络传输时间-正态分布图"
     
     print("result:",data)
     print("mean:",mu)
     print("std:",sigma)
     print("Dimension:",Dimension)
-    h = higram(Dimension, "1.txt", mu, sigma, data,  num_bins=100)
+    h = higram(Dimension, FILE, mu, sigma, data,  num_bins=100)
     h.creatchart()
     
